@@ -6,56 +6,165 @@
     <title>Listado de Pacientes - Gestor de Turnos</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/dashboard_style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
   </head>
   <body>
-    <div class="dashboard-container">
-      <!-- ENCABEZADO -->
-      <header class="main-header">
-        <span>Gestor de turnos</span>
-        <div class="header-actions">
-          <button id="btn-toggle-menu" class="btn-menu">&#9776;</button>
-          <button id="btn-logout" class="btn-logout">Cerrar Sesión</button>
-        </div>
-      </header>
-
-      <!-- NAVEGACIÓN (Panel Lateral) -->
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="dashboard-layout">
+      <!-- 1. NAVEGACIÓN (Panel Lateral) -->
       <nav id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+          <h2>Admin Portal</h2>
+          <span>Healthcare Management</span>
+        </div>
         <ul class="nav-links">
-          <li><a href="#">Panel Principal</a></li>
-          <li><a href="#">Pacientes</a></li>
+          <li>
+            <a href="#" class="active"
+              ><i class="fa-solid fa-border-all"></i> Panel</a
+            >
+          </li>
+          <li>
+            <a href="#"><i class="fa-solid fa-user-doctor"></i> Doctores</a>
+          </li>
+          <li>
+            <a href="#"><i class="fa-solid fa-cubes"></i> Especialidades</a>
+          </li>
+          <li>
+            <a href="#"
+              ><i class="fa-solid fa-magnifying-glass"></i> Búsqueda de
+              Pacientes</a
+            >
+          </li>
         </ul>
+        <div class="sidebar-footer">
+          <button id="btn-logout" class="btn-logout">Cerrar Sesión</button>
+          <div class="user-profile">
+            <img
+              src="https://ui-avatars.com/api/?name=Chibi&background=random"
+              alt="Avatar"
+            />
+            <div class="user-info">
+              <p>Chibi</p>
+              <span>Administrador</span>
+            </div>
+          </div>
+        </div>
       </nav>
 
-      <!-- CONTENIDO PRINCIPAL -->
+      <!-- 2. CONTENIDO PRINCIPAL -->
       <main class="main-content">
-        <!-- Sección del título -->
-        <section class="page-header">
-          <h1>Directorio de Pacientes</h1>
+        <header class="main-header">
+          <div class="header-title">
+            <button id="btn-toggle-menu" class="menu-btn">&#9776;</button>
+            <h4>Vista General de Gestion</h4>
+            <p>
+              Configure el personal medico y las especialidades del departamento
+            </p>
+          </div>
+          <div class="header-actions">
+            <button id="btn-agregar-doctor" class="btn-primary">
+              <i class="fa-solid fa-plus"></i> Agregar Doctor
+            </button>
+            <button id="btn-agregar-especialidad" class="btn-outline">
+              <i class="fa-solid fa-cubes"></i> Agregar Especialidad
+            </button>
+          </div>
+        </header>
+
+        <!-- SECCIÓN Tarjetas -->
+        <section class="kpi-grid">
+          <article class="kpi-card">
+            <div class="kpi-header">
+              <div class="kpi-icon">
+                <i class="fa-solid fa-suitcase-medical"></i>
+              </div>
+              <span class="kpi-badge badge-success">+4 este mes</span>
+            </div>
+            <p class="kpi-title">DOCTORES ACTIVOS</p>
+            <h2 class="kpi-number">124</h2>
+          </article>
+          <article class="kpi-card">
+            <div class="kpi-header">
+              <div class="kpi-icon">
+                <i class="fa-solid fa-border-all kpi-icon"></i>
+              </div>
+              <span class="kpi-badge badge-neutral">Estable</span>
+            </div>
+            <p class="kpi-title">ESPECIALIDADES ACTIVAS</p>
+            <h2 class="kpi-number">8</h2>
+          </article>
+          <article class="kpi-card">
+            <div class="kpi-header">
+              <div class="kpi-icon">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+              <span class="kpi-badge badge-info">Hoy</span>
+            </div>
+            <p class="kpi-title">TURNOS CONFIRMADOS PARA HOY</p>
+            <h2 class="kpi-number">20</h2>
+          </article>
         </section>
 
-        <!-- Sección de la tabla -->
+        <!-- SECCIÓN TABLA -->
         <section class="table-container">
+          <div class="table-header">
+            <h3>Directorio de Profesionales Médicos</h3>
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input
+                type="text"
+                id="search-doctor"
+                placeholder="Buscar por nombre"
+              />
+            </div>
+          </div>
           <table class="data-table">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Paciente</th>
+                <th>Nombre del Doctor</th>
+                <th>Especialidad</th>
+                <th>Estado de Disponibilidad</th>
+                <th>Acciones</th>
               </tr>
             </thead>
-            <tbody id="paciente-table-body">
-              <!-- Los pacientes se cargarán aquí dinámicamente -->
+            <tbody id="doctor-table-body">
+              <tr>
+                <td>
+                  <div class="doctor-info">
+                    <img
+                      src="https://ui-avatars.com/api/?name=Juan+Perez&background=0D8ABC&color=fff"
+                      alt="Doctor"
+                      class="doctor-avatar"
+                    />
+                    <span class="doctor-name">Dr. Juan Pérez</span>
+                  </div>
+                </td>
+                <td>Cardiología</td>
+                <td>
+                  <div class="status-available">
+                    <span class="dot"></span> Activo
+                  </div>
+                </td>
+                <td></td>
+              </tr>
             </tbody>
           </table>
+          <div class="table-pagination">
+            <button id="prev-page" class="btn-pagination">Anterior</button>
+            <span id="current-page" class="page-number">1</span>
+            <button id="next-page" class="btn-pagination">Siguiente</button>
+          </div>
         </section>
+
+        <!-- PIE DE PÁGINA (Adentro del main) -->
+        <footer class="main-footer">
+          Gestor de Turnos &copy; 2026 - Proyecto Académico
+        </footer>
       </main>
-
-      <!-- PIE DE PÁGINA -->
-      <footer class="main-footer">
-        Gestor de Turnos &copy; 2026 - Proyecto Académico
-      </footer>
     </div>
-
-    <!-- El JS se carga al final para asegurar que el HTML ya esté dibujado -->
     <script src="js/dashboard.js"></script>
   </body>
 </html>

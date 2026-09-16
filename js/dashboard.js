@@ -1,12 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const menuBtn = document.getElementById("menu-btn");
   const panelLateral = document.getElementById("sidebar");
   const logoutBtn = document.getElementById("btn-logout");
   const menuToggleBtn = document.getElementById("btn-toggle-menu");
 
   if (menuToggleBtn && panelLateral) {
-    menuToggleBtn.addEventListener("click", () => {
-      panelLateral.classList.toggle("mostrar");
+    menuToggleBtn.addEventListener("click", function () {
+      panelLateral.classList.toggle("open");
     });
   }
 

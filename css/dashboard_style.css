@@ -1,76 +1,368 @@
-/* Estructura Base (Diseño para Celulares) */
-.dashboard-container {
-  display: grid;
-  grid-template-columns: 1fr; /* Una sola columna en celulares */
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "header"
-    "main"
-    "footer";
-  height: 100vh;
-  position: relative; /* Clave para que el menú flote encima */
-  overflow-x: hidden;
-}
-
-.main-header {
-  grid-area: header;
-  height: 50px;
-  background-color: #333;
-  color: white;
+.dashboard-layout {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1rem;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .sidebar {
-  position: absolute; /* En celular flota por encima del contenido */
-  top: 50px; /* Se acomoda justo debajo del header */
-  bottom: 0;
-  width: 200px;
-  background-color: #f4f4f4;
-  left: -200px; /* Oculto por defecto a la izquierda */
-  transition: left var(--transition-speed) ease-in-out; /* Animación suave al abrir/cerrar */
+  display: none;
+  background: white;
+  border-right: 1px solid var(--border-color);
+  flex-direction: column;
 }
 
-/* CLASE INTERRUPTOR: JS inyectará esta clase para abrir el menú */
-.sidebar.mostrar {
-  left: 0;
+.sidebar.open {
+  display: flex;
 }
 
-.main-content {
-  grid-area: main;
+.sidebar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.nav-links li a {
+  display: block;
+  padding: 1rem 1.5rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.nav-links li a i {
+  width: 25px;
+  font-size: 1.1rem;
+}
+
+.nav-links li a:hover {
+  background-color: #f8fafc;
+  color: var(--accent-blue);
+  border-left: 4px solid var(--active-green);
+}
+
+.sidebar-footer {
+  margin-top: auto;
   padding: 1rem;
-  overflow-y: auto;
+  border-top: 1px solid var(--border-color);
+}
+
+.btn-logout {
+  background: none;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.user-profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+.user-info span {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* CONTENIDO PRINCIPAL */
+.main-content {
+  padding: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ENCABEZADO Y BOTONES */
+.main-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.header-title h4 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--bg-dark-blue);
+}
+.header-title p {
+  margin: 5px 0 0 0;
+  color: var(--text-secondary);
+}
+
+.menu-btn {
+  background: var(--bg-dark-blue);
+  color: white;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.header-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.btn-primary {
+  background-color: var(--bg-dark-blue);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--accent-blue);
+  border: 1px solid var(--accent-blue);
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.kpi-card {
+  background: white;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.kpi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.kpi-icon {
+  background-color: #f0f4f8;
+  color: var(--bg-dark-blue);
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.kpi-badge {
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+.badge-success {
+  background-color: #e6f4ea;
+  color: #1e8e3e;
+}
+.badge-neutral {
+  background-color: #f1f3f4;
+  color: #5f6368;
+}
+.badge-info {
+  background-color: #e8f0fe;
+  color: #1a73e8;
+}
+
+.kpi-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+.kpi-number {
+  font-size: 2.2rem;
+  color: var(--bg-dark-blue);
+  margin: 0;
+}
+
+/* TABLA DE DOCTORES */
+.table-container {
+  background: rgba(255, 255, 255, 0.151);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.search-box {
+  position: relative;
+}
+.search-box i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+}
+.search-box input {
+  padding: 8px 10px 8px 35px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  outline: none;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.data-table th,
+.data-table td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+.data-table th {
+  background-color: #f8f9fa;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.doctor-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.doctor-info img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.doctor-name {
+  font-weight: 600;
+  color: var(--bg-dark-blue);
+}
+
+.status-available {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--active-green);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.status-available .dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--active-green);
+  border-radius: 50%;
+}
+
+.table-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #f9fbfb;
+}
+.btn-pagination {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.page-number {
+  background: #f4f4f4;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 4px;
 }
 
 .main-footer {
-  grid-area: footer;
-  background-color: #333;
-  color: white;
   text-align: center;
-  padding: 1rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 2rem;
 }
 
-/* Pantallas grandes (Monitores de PC) */
-@media screen and (min-width: 600px) {
-  .dashboard-container {
-    grid-template-columns: 200px 1fr; /* Dos columnas: Menu | Contenido */
-    grid-template-areas:
-      "header header"
-      "nav main"
-      "footer footer";
+/* =========================================
+   3. ESCRITORIO (Media Query)
+   ========================================= */
+@media (min-width: 650px) {
+  .dashboard-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr; /* 250px Menú | 1fr Contenido */
+    height: 100vh;
   }
-
   .sidebar {
-    grid-area: nav;
-    position: static; /* Ya no flota, es una columna fija */
-    left: 0; /* Siempre visible */
-    height: auto;
+    display: flex;
+  } /* Fuerzo a que el menú siempre esté visible */
+  .menu-btn {
+    display: none;
+  } /* Escondo el botón hamburguesa */
+
+  .main-content {
+    overflow-y: auto; /* Scroll solo en el panel principal */
+    padding: 2rem 3rem;
   }
 
-  /* Ocultamos el botón de las 3 rayitas porque en PC el menú ya está visible */
-  .btn-menu {
-    display: none;
+  .main-header {
+    flex-direction: column; /* Texto y botones se alinean en horizontal */
+    gap: 1.5rem;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .header-actions {
+    flex-direction: row; /* Los botones se alinean uno al lado del otro */
+  }
+
+  .kpi-grid {
+    grid-template-columns: repeat(
+      3,
+      1fr
+    ); /* 3 columnas iguales para las tarjetas */
   }
 }
