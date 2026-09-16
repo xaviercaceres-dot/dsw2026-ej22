@@ -1,189 +1,76 @@
-/* 
-   MÓVIL (Mobile-First)
- */
-.dashboard-layout {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: var(--bg-main);
-}
-
-.sidebar {
-  display: none; /* Oculto en móvil */
-  background: white;
-  border-right: 1px solid var(--border-color);
-  flex-direction: column;
-  padding-top: 1rem;
-}
-
-.sidebar.open {
-  display: flex; /* Clase activada por JS */
-}
-
-.sidebar-header {
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--border-color);
-  margin-bottom: 1rem;
-}
-
-.nav-links {
-  list-style: none;
-  flex-grow: 1;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 1.5rem;
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-weight: 600;
-  border-left: 4px solid transparent;
-}
-
-.nav-link.active {
-  color: var(--accent-blue);
-  border-left-color: var(--active-green);
-  background-color: #f8fafc;
-}
-
-.btn-logout {
-  background: none;
-  border: none;
-  width: 100%;
-  cursor: pointer;
-  text-align: left;
-  font-size: 1rem;
-}
-
-.main-content {
-  padding: 1.5rem;
-  width: 100%;
+/* Estructura Base (Diseño para Celulares) */
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr; /* Una sola columna en celulares */
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  height: 100vh;
+  position: relative; /* Clave para que el menú flote encima */
+  overflow-x: hidden;
 }
 
 .main-header {
+  grid-area: header;
+  height: 50px;
+  background-color: #333;
+  color: white;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 2rem;
+  padding: 0 1rem;
 }
 
-.menu-btn {
-  background: var(--bg-dark-blue);
-  color: white;
-  border: none;
-  padding: 0.5rem 0.8rem;
-  border-radius: 4px;
-  cursor: pointer;
+.sidebar {
+  position: absolute; /* En celular flota por encima del contenido */
+  top: 50px; /* Se acomoda justo debajo del header */
+  bottom: 0;
+  width: 200px;
+  background-color: #f4f4f4;
+  left: -200px; /* Oculto por defecto a la izquierda */
+  transition: left var(--transition-speed) ease-in-out; /* Animación suave al abrir/cerrar */
 }
 
-.header-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
+/* CLASE INTERRUPTOR: JS inyectará esta clase para abrir el menú */
+.sidebar.mostrar {
+  left: 0;
 }
 
-.btn-primary {
-  background-color: var(--bg-dark-blue);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.btn-outline {
-  background: transparent;
-  color: var(--accent-blue);
-  border: 1px solid var(--accent-blue);
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.kpi-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.kpi-card {
-  background: white;
-  padding: 1.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-}
-
-.kpi-icon {
-  color: var(--accent-blue);
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.kpi-title {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--text-secondary);
-}
-
-.kpi-number {
-  font-size: 2rem;
-  color: var(--bg-dark-blue);
-}
-
-.table-container {
-  background: white;
-  padding: 1.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  overflow-x: auto;
-}
-
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-}
-
-.data-table th,
-.data-table td {
+.main-content {
+  grid-area: main;
   padding: 1rem;
-  border-bottom: 1px solid var(--border-color);
+  overflow-y: auto;
 }
 
-.data-table th {
-  color: var(--text-secondary);
-  font-weight: 600;
-  font-size: 0.85rem;
+.main-footer {
+  grid-area: footer;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
 }
 
-/*
-   ESCRITORIO (Media Query)
- */
-@media (min-width: 768px) {
-  .dashboard-layout {
-    display: grid;
-    grid-template-columns: 250px 1fr; /* 250px para el panel lateral fijo */
+/* Pantallas grandes (Monitores de PC) */
+@media screen and (min-width: 600px) {
+  .dashboard-container {
+    grid-template-columns: 200px 1fr; /* Dos columnas: Menu | Contenido */
+    grid-template-areas:
+      "header header"
+      "nav main"
+      "footer footer";
   }
 
   .sidebar {
-    display: flex; /* Fuerzo a que el menú siempre esté visible */
+    grid-area: nav;
+    position: static; /* Ya no flota, es una columna fija */
+    left: 0; /* Siempre visible */
+    height: auto;
   }
 
-  .menu-btn {
-    display: none; /* Escondo el botón hamburguesa */
-  }
-
-  .header-actions {
-    flex-direction: row; /* Los botones se alinean horizontalmente */
-  }
-
-  .kpi-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas del mismo tamaño */
+  /* Ocultamos el botón de las 3 rayitas porque en PC el menú ya está visible */
+  .btn-menu {
+    display: none;
   }
 }

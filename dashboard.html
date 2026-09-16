@@ -3,144 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin - Página Principal</title>
+    <title>Listado de Pacientes - Gestor de Turnos</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/dashboard_style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
   </head>
   <body>
-    <div class="dashboard-layout">
-      <!-- PANEL LATERAL -->
+    <div class="dashboard-container">
+      <!-- ENCABEZADO -->
+      <header class="main-header">
+        <span>Gestor de turnos</span>
+        <div class="header-actions">
+          <button id="btn-toggle-menu" class="btn-menu">&#9776;</button>
+          <button id="btn-logout" class="btn-logout">Cerrar Sesión</button>
+        </div>
+      </header>
+
+      <!-- NAVEGACIÓN (Panel Lateral) -->
       <nav id="sidebar" class="sidebar">
-        <div class="sidebar-header">
-          <h3 style="color: var(--accent-blue)">Admin Portal</h3>
-          <p style="font-size: 0.75rem; color: var(--text-secondary)">
-            Healthcare Management
-          </p>
-        </div>
-
         <ul class="nav-links">
-          <li>
-            <a href="#" class="nav-link active"
-              ><i class="fa-solid fa-table-cells-large"></i> Panel</a
-            >
-          </li>
-          <li>
-            <a href="#" class="nav-link"
-              ><i class="fa-solid fa-user-doctor"></i> Doctores</a
-            >
-          </li>
-          <li>
-            <a href="#" class="nav-link"
-              ><i class="fa-solid fa-stethoscope"></i> Especialidades</a
-            >
-          </li>
-          <li>
-            <a href="#" class="nav-link"
-              ><i class="fa-solid fa-users"></i> Búsqueda de Pacientes</a
-            >
-          </li>
+          <li><a href="#">Panel Principal</a></li>
+          <li><a href="#">Pacientes</a></li>
         </ul>
-
-        <div class="sidebar-footer">
-          <a href="#" class="nav-link"
-            ><i class="fa-solid fa-gear"></i> Configuración</a
-          >
-          <button id="logout" class="nav-link btn-logout">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
-          </button>
-        </div>
       </nav>
 
       <!-- CONTENIDO PRINCIPAL -->
       <main class="main-content">
-        <header class="main-header">
-          <div>
-            <h1 style="color: var(--bg-dark-blue); margin-bottom: 0.25rem">
-              Vista General de Gestión
-            </h1>
-            <p style="color: var(--text-secondary)">
-              Configure el personal médico y las especialidades del
-              departamento.
-            </p>
-          </div>
-          <button id="menu-btn" class="menu-btn">
-            <i class="fa-solid fa-bars"></i>
-          </button>
-        </header>
+        <!-- Sección del título -->
+        <section class="page-header">
+          <h1>Directorio de Pacientes</h1>
+        </section>
 
-        <div class="header-actions">
-          <button class="btn-primary">
-            <i class="fa-solid fa-plus"></i> Agregar Nuevo Doctor
-          </button>
-          <button class="btn-outline">
-            <i class="fa-solid fa-plus"></i> Agregar Nueva Especialidad
-          </button>
-        </div>
-
-        <!-- TARJETAS DE ESTADÍSTICAS -->
-        <div class="kpi-grid">
-          <div class="kpi-card">
-            <span
-              style="
-                color: var(--active-green);
-                font-size: 0.8rem;
-                float: right;
-              "
-              >+4 este mes</span
-            >
-            <i class="fa-solid fa-user-doctor kpi-icon"></i>
-            <p class="kpi-title">DOCTORES ACTIVOS</p>
-            <h2 class="kpi-number">124</h2>
-          </div>
-          <div class="kpi-card">
-            <span
-              style="
-                color: var(--text-secondary);
-                font-size: 0.8rem;
-                float: right;
-              "
-              >Estable</span
-            >
-            <i class="fa-solid fa-border-all kpi-icon"></i>
-            <p class="kpi-title">ESPECIALIDADES ACTIVAS</p>
-            <h2 class="kpi-number">32</h2>
-          </div>
-          <div class="kpi-card">
-            <span
-              style="color: var(--accent-blue); font-size: 0.8rem; float: right"
-              >Hoy</span
-            >
-            <i class="fa-solid fa-calendar-check kpi-icon"></i>
-            <p class="kpi-title">TURNOS CONFIRMADOS</p>
-            <h2 class="kpi-number">48</h2>
-          </div>
-        </div>
-
-        <!-- TABLA -->
-        <div class="table-container">
-          <h3 style="margin-bottom: 1rem; color: var(--bg-dark-blue)">
-            Directorio de Profesionales Médicos
-          </h3>
+        <!-- Sección de la tabla -->
+        <section class="table-container">
           <table class="data-table">
             <thead>
               <tr>
-                <th>Nombre del Doctor</th>
-                <th>Especialidad</th>
-                <th>Estado de Disponibilidad</th>
+                <th>ID</th>
+                <th>Paciente</th>
               </tr>
             </thead>
-            <tbody id="product-table-body">
-              <!-- Se inyectará vía JS -->
+            <tbody id="paciente-table-body">
+              <!-- Los pacientes se cargarán aquí dinámicamente -->
             </tbody>
           </table>
-        </div>
+        </section>
       </main>
+
+      <!-- PIE DE PÁGINA -->
+      <footer class="main-footer">
+        Gestor de Turnos &copy; 2026 - Proyecto Académico
+      </footer>
     </div>
 
+    <!-- El JS se carga al final para asegurar que el HTML ya esté dibujado -->
     <script src="js/dashboard.js"></script>
   </body>
 </html>
