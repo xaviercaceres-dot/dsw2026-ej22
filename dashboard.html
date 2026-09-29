@@ -30,7 +30,9 @@
             <a href="#"><i class="fa-solid fa-user-doctor"></i> Doctores</a>
           </li>
           <li>
-            <a href="#"><i class="fa-solid fa-cubes"></i> Especialidades</a>
+            <a href="#specialties-section"
+              ><i class="fa-solid fa-cubes"></i> Especialidades</a
+            >
           </li>
           <li>
             <a href="#"
@@ -68,7 +70,11 @@
             <button id="btn-agregar-doctor" class="btn-primary">
               <i class="fa-solid fa-plus"></i> Agregar Doctor
             </button>
-            <button id="btn-agregar-especialidad" class="btn-outline">
+            <button
+              type="button"
+              id="btn-agregar-especialidad"
+              class="btn-outline"
+            >
               <i class="fa-solid fa-cubes"></i> Agregar Especialidad
             </button>
           </div>
@@ -157,6 +163,49 @@
             <span id="current-page" class="page-number">1</span>
             <button id="next-page" class="btn-pagination">Siguiente</button>
           </div>
+        </section>
+
+        <!-- SECCIÓN DE ESPECIALIDADES -->
+        <section id="specialties-section" class="table-container">
+          <div class="table-header">
+            <h3>Listado de Especialidades</h3>
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input
+                type="search"
+                id="search-specialty"
+                placeholder="Buscar especialidad"
+                aria-label="Buscar especialidad"
+              />
+            </div>
+          </div>
+
+          <form id="specialty-form" class="specialty-form">
+            <label for="specialty-name">Nueva especialidad</label>
+            <div class="specialty-form-fields">
+              <input
+                type="text"
+                id="specialty-name"
+                placeholder="Ej. Neurología"
+                required
+              />
+              <button type="submit" class="btn-primary">
+                <i class="fa-solid fa-plus"></i> Guardar especialidad
+              </button>
+            </div>
+          </form>
+
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Nombre de la Especialidad</th>
+              </tr>
+            </thead>
+            <tbody id="specialty-table-body"></tbody>
+          </table>
+          <p id="specialty-empty-state" class="empty-state">
+            No hay especialidades registradas.
+          </p>
         </section>
 
         <!-- PIE DE PÁGINA (Adentro del main) -->
