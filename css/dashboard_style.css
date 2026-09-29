@@ -46,6 +46,12 @@
   border-left: 4px solid var(--active-green);
 }
 
+.nav-links li a.active {
+  background-color: #f8fafc;
+  color: var(--accent-blue);
+  border-left: 4px solid var(--active-green);
+}
+
 .sidebar-footer {
   margin-top: auto;
   padding: 1rem;
@@ -249,6 +255,8 @@
   border-radius: 4px;
   background-color: #f8f9fa;
   outline: none;
+  width: 100%;
+  max-width: 260px;
 }
 
 .data-table {
@@ -306,6 +314,56 @@
   padding: 1rem 1.5rem;
   background-color: #f9fbfb;
 }
+
+#specialties-section {
+  scroll-margin-top: 1.5rem;
+}
+
+.specialty-form {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: white;
+}
+
+.specialty-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.specialty-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.specialty-form-fields input {
+  width: 100%;
+  min-width: 0;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  outline: none;
+}
+
+.specialty-form-fields input:focus,
+.search-box input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(14, 76, 132, 0.12);
+}
+
+.empty-state {
+  padding: 1.25rem 1.5rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.empty-state[hidden] {
+  display: none;
+}
+
 .btn-pagination {
   background: white;
   border: 1px solid #ccc;
@@ -357,6 +415,20 @@
 
   .header-actions {
     flex-direction: row; /* Los botones se alinean uno al lado del otro */
+  }
+
+  .specialty-form-fields {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .specialty-form-fields input {
+    flex: 1;
+  }
+
+  .specialty-form-fields .btn-primary {
+    width: auto;
+    white-space: nowrap;
   }
 
   .kpi-grid {
