@@ -9,8 +9,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const specialtyTableBody = document.getElementById("specialty-table-body");
   const specialtyEmptyState = document.getElementById("specialty-empty-state");
   const specialtyCount = document.getElementById("specialty-count");
+  const specialtySection = document.getElementById("specialties-section");
+  const specialtySearchInput = document.getElementById("search-specialty");
+  const addSpecialtyButton = document.getElementById(
+    "btn-agregar-especialidad",
+  );
+  const specialtyNavLink = document.querySelector(
+    'a[href="#specialties-section"]',
+  );
+  const navigationLinks = document.querySelectorAll(".nav-links a");
 
   let specialties = loadSpecialties();
+  let specialtySearchTerm = "";
 
   if (menuToggleBtn && panelLateral) {
     menuToggleBtn.addEventListener("click", function () {
@@ -55,6 +65,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  if (specialtySearchInput) {
+    specialtySearchInput.addEventListener("input", () => {
+      specialtySearchTerm = specialtySearchInput.value.trim().toLowerCase();
+      renderSpecialties();
+    });
+  }
+
+  if (specialtyNavLink) {
+    specialtyNavLink.addEventListener("click", (event) => {
+      event.preventDefault();
+      focusSpecialtiesSection();
+      setActiveNavigationLink(specialtyNavLink);
+    });
+  }
+
+  if (addSpecialtyButton) {
+    addSpecialtyButton.addEventListener("click", () => {
+      focusSpecialtiesSection();
+      specialtyNameInput.focus();
+    });
+  }
+
   function loadSpecialties() {
     try {
       const storedSpecialties = localStorage.getItem(SPECIALTIES_STORAGE_KEY);
@@ -80,10 +112,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderSpecialties() {
-    specialtyTableBody.innerHTML = "";
-    specialtyEmptyState.hidden = specialties.length > 0;
+    const visibleSpecialties = specialties.filter((specialty) =>
+      specialty.toLowerCase().includes(specialtySearchTerm),
+    );
 
-    specialties.forEach((specialty) => {
+    specialtyTableBody.innerHTML = "";
+    specialtyEmptyState.hidden = visibleSpecialties.length > 0;
+    specialtyEmptyState.textContent = specialtySearchTerm
+      ? "No se encontraron especialidades."
+      : "No hay especialidades registradas.";
+
+    visibleSpecialties.forEach((specialty) => {
       const row = document.createElement("tr");
       const cell = document.createElement("td");
       cell.textContent = specialty;
@@ -92,6 +131,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     specialtyCount.textContent = specialties.length;
+  }
+
+  function focusSpecialtiesSection() {
+    specialtySection.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function setActiveNavigationLink(activeLink) {
+    navigationLinks.forEach((link) => link.classList.remove("active"));
+    activeLink.classList.add("active");
   }
 
   if (specialtyTableBody && specialtyEmptyState && specialtyCount) {
