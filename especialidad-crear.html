@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nueva Especialidad | MedPortal</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard_style.css" />
+    <link rel="stylesheet" href="css/specialties_style.css" />
+  </head>
+  <body>
+    <div class="dashboard-layout">
+      <!-- MENÚ LATERAL -->
+      <nav id="sidebar" class="sidebar" aria-label="Menú principal">
+        <div class="sidebar-header">
+          <h2>Admin Portal</h2>
+          <span>Healthcare Management</span>
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a href="dashboard.html"
+              ><i class="fa-solid fa-table-cells-large" aria-hidden="true"></i> Panel</a
+            >
+          </li>
+          <li>
+            <a href="dashboard.html#directorio"
+              ><i class="fa-solid fa-briefcase-medical" aria-hidden="true"></i> Doctores</a
+            >
+          </li>
+          <li>
+            <a href="especialidades.html" class="active" aria-current="page"
+              ><i class="fa-solid fa-shapes" aria-hidden="true"></i> Especialidades</a
+            >
+          </li>
+          <li>
+            <a href="#"
+              ><i class="fa-solid fa-users-viewfinder" aria-hidden="true"></i> Búsqueda de Pacientes</a
+            >
+          </li>
+        </ul>
+        <div class="sidebar-footer">
+          <a href="#" class="sidebar-footer-link"
+            ><i class="fa-solid fa-gear" aria-hidden="true"></i> Configuración</a
+          >
+          <button type="button" id="btn-logout" class="sidebar-footer-link">
+            <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>
+            Cerrar Sesión
+          </button>
+          <div class="user-profile">
+            <img
+              src="https://ui-avatars.com/api/?name=Chibi&background=0b4a7f&color=fff"
+              alt=""
+            />
+            <div class="user-info">
+              <p>Chibi</p>
+              <span>Administrador</span>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="sidebar-overlay" class="sidebar-overlay" hidden></div>
+
+      <!-- CONTENIDO PRINCIPAL -->
+      <div class="main-wrapper">
+        <header class="mobile-topbar">
+          <button
+            type="button"
+            id="btn-toggle-menu"
+            class="menu-btn"
+            aria-controls="sidebar"
+            aria-expanded="false"
+            aria-label="Abrir menú"
+          >
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+          </button>
+          <span class="mobile-topbar-brand">Admin Portal</span>
+        </header>
+
+        <main class="main-content">
+          <nav class="breadcrumb" aria-label="Ruta de navegación">
+            <ol>
+              <li><a href="especialidades.html">Especialidades</a></li>
+              <li aria-current="page">Agregar Nueva Especialidad</li>
+            </ol>
+          </nav>
+
+          <header class="form-page-header">
+            <h1 class="form-page-title">Registrar Nueva Especialidad</h1>
+            <p class="page-subtitle">
+              Complete la información técnica y administrativa para dar de alta
+              una especialidad médica en el sistema hospitalario.
+            </p>
+          </header>
+
+          <form id="specialty-form" class="form-card" novalidate>
+            <div class="form-group">
+              <label for="specialty-name">Nombre de la Especialidad</label>
+              <input
+                type="text"
+                id="specialty-name"
+                name="name"
+                placeholder="Ej. Cardiología Intervencionista"
+                minlength="3"
+                maxlength="100"
+                aria-describedby="specialty-name-error"
+                required
+              />
+              <p id="specialty-name-error" class="field-error" hidden></p>
+            </div>
+
+            <div class="form-group">
+              <label for="specialty-description">Descripción</label>
+              <textarea
+                id="specialty-description"
+                name="description"
+                rows="6"
+                placeholder="Detalle el alcance de la especialidad, procedimientos principales y requisitos de derivación..."
+                minlength="10"
+                maxlength="100"
+                aria-describedby="specialty-description-error specialty-description-counter"
+                required
+              ></textarea>
+              <div class="field-meta">
+                <p id="specialty-description-error" class="field-error" hidden></p>
+                <span id="specialty-description-counter" class="char-counter">0/100</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="specialty-status">Estado inicial</label>
+              <div class="select-wrapper">
+                <select id="specialty-status" name="status">
+                  <option value="active">Activo - Disponible para programación</option>
+                  <option value="inactive">Inactivo - No disponible para programación</option>
+                </select>
+                <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <a href="especialidades.html" class="btn btn-cancel">Cancelar</a>
+              <button type="submit" class="btn btn-save">
+                <i class="fa-regular fa-floppy-disk" aria-hidden="true"></i> Guardar
+                Especialidad
+              </button>
+            </div>
+          </form>
+
+          <footer class="main-footer">
+            Gestor de Turnos &copy; 2026 - Proyecto Académico
+          </footer>
+        </main>
+      </div>
+    </div>
+    <script src="js/layout.js"></script>
+    <script src="js/specialties-store.js"></script>
+    <script src="js/especialidad-crear.js"></script>
+  </body>
+</html>

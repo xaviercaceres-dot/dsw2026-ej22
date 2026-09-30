@@ -3,50 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Listado de Pacientes - Gestor de Turnos</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/dashboard_style.css" />
+    <title>Panel de Administración | MedPortal</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard_style.css" />
   </head>
   <body>
-    <!-- CONTENEDOR PRINCIPAL -->
     <div class="dashboard-layout">
-      <!-- 1. NAVEGACIÓN (Panel Lateral) -->
-      <nav id="sidebar" class="sidebar">
+      <!-- MENÚ LATERAL -->
+      <nav id="sidebar" class="sidebar" aria-label="Menú principal">
         <div class="sidebar-header">
           <h2>Admin Portal</h2>
           <span>Healthcare Management</span>
         </div>
         <ul class="nav-links">
           <li>
-            <a href="#" class="active"
-              ><i class="fa-solid fa-border-all"></i> Panel</a
+            <a href="dashboard.html" class="active" aria-current="page"
+              ><i class="fa-solid fa-table-cells-large" aria-hidden="true"></i> Panel</a
             >
           </li>
           <li>
-            <a href="#"><i class="fa-solid fa-user-doctor"></i> Doctores</a>
+            <a href="dashboard.html#directorio"
+              ><i class="fa-solid fa-briefcase-medical" aria-hidden="true"></i> Doctores</a
+            >
           </li>
           <li>
-            <a href="#specialties-section"
-              ><i class="fa-solid fa-cubes"></i> Especialidades</a
+            <a href="especialidades.html"
+              ><i class="fa-solid fa-shapes" aria-hidden="true"></i> Especialidades</a
             >
           </li>
           <li>
             <a href="#"
-              ><i class="fa-solid fa-magnifying-glass"></i> Búsqueda de
-              Pacientes</a
+              ><i class="fa-solid fa-users-viewfinder" aria-hidden="true"></i> Búsqueda de Pacientes</a
             >
           </li>
         </ul>
         <div class="sidebar-footer">
-          <button id="btn-logout" class="btn-logout">Cerrar Sesión</button>
+          <a href="#" class="sidebar-footer-link"
+            ><i class="fa-solid fa-gear" aria-hidden="true"></i> Configuración</a
+          >
+          <button type="button" id="btn-logout" class="sidebar-footer-link">
+            <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>
+            Cerrar Sesión
+          </button>
           <div class="user-profile">
             <img
-              src="https://ui-avatars.com/api/?name=Chibi&background=random"
-              alt="Avatar"
+              src="https://ui-avatars.com/api/?name=Chibi&background=0b4a7f&color=fff"
+              alt=""
             />
             <div class="user-info">
               <p>Chibi</p>
@@ -55,165 +65,174 @@
           </div>
         </div>
       </nav>
+      <div id="sidebar-overlay" class="sidebar-overlay" hidden></div>
 
-      <!-- 2. CONTENIDO PRINCIPAL -->
-      <main class="main-content">
-        <header class="main-header">
-          <div class="header-title">
-            <button id="btn-toggle-menu" class="menu-btn">&#9776;</button>
-            <h4>Vista General de Gestion</h4>
-            <p>
-              Configure el personal medico y las especialidades del departamento
-            </p>
-          </div>
-          <div class="header-actions">
-            <button id="btn-agregar-doctor" class="btn-primary">
-              <i class="fa-solid fa-plus"></i> Agregar Doctor
-            </button>
-            <button
-              type="button"
-              id="btn-agregar-especialidad"
-              class="btn-outline"
-            >
-              <i class="fa-solid fa-cubes"></i> Agregar Especialidad
-            </button>
-          </div>
+      <!-- CONTENIDO PRINCIPAL -->
+      <div class="main-wrapper">
+        <header class="mobile-topbar">
+          <button
+            type="button"
+            id="btn-toggle-menu"
+            class="menu-btn"
+            aria-controls="sidebar"
+            aria-expanded="false"
+            aria-label="Abrir menú"
+          >
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+          </button>
+          <span class="mobile-topbar-brand">Admin Portal</span>
         </header>
 
-        <!-- SECCIÓN Tarjetas -->
-        <section class="kpi-grid">
-          <article class="kpi-card">
-            <div class="kpi-header">
-              <div class="kpi-icon">
-                <i class="fa-solid fa-suitcase-medical"></i>
-              </div>
-              <span class="kpi-badge badge-success">+4 este mes</span>
+        <main class="main-content">
+          <header class="page-header">
+            <div>
+              <h1 class="page-title">Vista General de Gestión</h1>
+              <p class="page-subtitle">
+                Configure el personal médico y las especialidades del
+                departamento.
+              </p>
             </div>
-            <p class="kpi-title">DOCTORES ACTIVOS</p>
-            <h2 class="kpi-number">124</h2>
-          </article>
-          <article class="kpi-card">
-            <div class="kpi-header">
-              <div class="kpi-icon">
-                <i class="fa-solid fa-border-all kpi-icon"></i>
-              </div>
-              <span class="kpi-badge badge-neutral">Estable</span>
-            </div>
-            <p class="kpi-title">ESPECIALIDADES ACTIVAS</p>
-            <h2 id="specialty-count" class="kpi-number">0</h2>
-          </article>
-          <article class="kpi-card">
-            <div class="kpi-header">
-              <div class="kpi-icon">
-                <i class="fa-solid fa-calendar-check"></i>
-              </div>
-              <span class="kpi-badge badge-info">Hoy</span>
-            </div>
-            <p class="kpi-title">TURNOS CONFIRMADOS PARA HOY</p>
-            <h2 class="kpi-number">20</h2>
-          </article>
-        </section>
+          </header>
 
-        <!-- SECCIÓN TABLA -->
-        <section class="table-container">
-          <div class="table-header">
-            <h3>Directorio de Profesionales Médicos</h3>
-            <div class="search-box">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input
-                type="text"
-                id="search-doctor"
-                placeholder="Buscar por nombre"
-              />
-            </div>
-          </div>
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Nombre del Doctor</th>
-                <th>Especialidad</th>
-                <th>Estado de Disponibilidad</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="doctor-table-body">
-              <tr>
-                <td>
-                  <div class="doctor-info">
-                    <img
-                      src="https://ui-avatars.com/api/?name=Juan+Perez&background=0D8ABC&color=fff"
-                      alt="Doctor"
-                      class="doctor-avatar"
-                    />
-                    <span class="doctor-name">Dr. Juan Pérez</span>
-                  </div>
-                </td>
-                <td>Cardiología</td>
-                <td>
-                  <div class="status-available">
-                    <span class="dot"></span> Activo
-                  </div>
-                </td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="table-pagination">
-            <button id="prev-page" class="btn-pagination">Anterior</button>
-            <span id="current-page" class="page-number">1</span>
-            <button id="next-page" class="btn-pagination">Siguiente</button>
-          </div>
-        </section>
-
-        <!-- SECCIÓN DE ESPECIALIDADES -->
-        <section id="specialties-section" class="table-container">
-          <div class="table-header">
-            <h3>Listado de Especialidades</h3>
-            <div class="search-box">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input
-                type="search"
-                id="search-specialty"
-                placeholder="Buscar especialidad"
-                aria-label="Buscar especialidad"
-              />
-            </div>
+          <div class="header-actions">
+            <a href="#" class="btn btn-primary"
+              ><i class="fa-solid fa-plus" aria-hidden="true"></i> Agregar Nuevo
+              Doctor</a
+            >
+            <a href="especialidad-crear.html" class="btn btn-outline"
+              ><i class="fa-solid fa-shapes" aria-hidden="true"></i> Agregar
+              Nueva Especialidad</a
+            >
           </div>
 
-          <form id="specialty-form" class="specialty-form">
-            <label for="specialty-name">Nueva especialidad</label>
-            <div class="specialty-form-fields">
-              <input
-                type="text"
-                id="specialty-name"
-                placeholder="Ej. Neurología"
-                required
-              />
-              <button type="submit" class="btn-primary">
-                <i class="fa-solid fa-plus"></i> Guardar especialidad
-              </button>
+          <!-- TARJETAS KPI -->
+          <section class="kpi-grid" aria-label="Indicadores">
+            <article class="kpi-card">
+              <div class="kpi-header">
+                <div class="kpi-icon">
+                  <i class="fa-solid fa-briefcase-medical" aria-hidden="true"></i>
+                </div>
+                <span class="kpi-badge badge-success">+4 este mes</span>
+              </div>
+              <p class="kpi-title">Doctores activos</p>
+              <p class="kpi-number">124</p>
+            </article>
+            <article class="kpi-card">
+              <div class="kpi-header">
+                <div class="kpi-icon">
+                  <i class="fa-solid fa-table-cells-large" aria-hidden="true"></i>
+                </div>
+                <span class="kpi-badge badge-neutral">Estable</span>
+              </div>
+              <p class="kpi-title">Especialidades activas</p>
+              <p id="specialty-count" class="kpi-number">0</p>
+            </article>
+            <article class="kpi-card">
+              <div class="kpi-header">
+                <div class="kpi-icon">
+                  <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
+                </div>
+                <span class="kpi-badge badge-info">Hoy</span>
+              </div>
+              <p class="kpi-title">Turnos confirmados para hoy</p>
+              <p class="kpi-number">48</p>
+            </article>
+          </section>
+
+          <!-- DIRECTORIO DE DOCTORES -->
+          <section id="directorio" class="table-card" aria-labelledby="directorio-title">
+            <div class="table-card-header">
+              <h2 id="directorio-title">Directorio de Profesionales Médicos</h2>
+              <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                <input
+                  type="search"
+                  id="search-doctor"
+                  placeholder="Buscar por nombre..."
+                  aria-label="Buscar doctor por nombre"
+                />
+              </div>
             </div>
-          </form>
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre del Doctor</th>
+                    <th scope="col">Especialidad</th>
+                    <th scope="col">Estado de Disponibilidad</th>
+                    <th scope="col" class="col-actions">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="doctor-table-body">
+                  <tr>
+                    <td>
+                      <div class="doctor-info">
+                        <img
+                          src="https://ui-avatars.com/api/?name=James+Wilson&background=0D8ABC&color=fff"
+                          alt=""
+                        />
+                        <span class="doctor-name">Dr. James Wilson</span>
+                      </div>
+                    </td>
+                    <td>Cardiología</td>
+                    <td><span class="badge badge-dot badge-success">Activo</span></td>
+                    <td class="col-actions"></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="doctor-info">
+                        <img
+                          src="https://ui-avatars.com/api/?name=Elena+Rodriguez&background=0f9d8a&color=fff"
+                          alt=""
+                        />
+                        <span class="doctor-name">Dr. Elena Rodriguez</span>
+                      </div>
+                    </td>
+                    <td>Neurología</td>
+                    <td><span class="badge badge-dot badge-success">Activo</span></td>
+                    <td class="col-actions"></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="doctor-info">
+                        <img
+                          src="https://ui-avatars.com/api/?name=Robert+Chen&background=5b6b7d&color=fff"
+                          alt=""
+                        />
+                        <span class="doctor-name">Dr. Robert Chen</span>
+                      </div>
+                    </td>
+                    <td>Pediatría</td>
+                    <td><span class="badge badge-dot badge-warning">De Licencia</span></td>
+                    <td class="col-actions"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p id="doctor-empty-state" class="table-empty" aria-live="polite" hidden>
+              No se encontraron doctores con ese nombre.
+            </p>
+            <div class="table-footer">
+              <span id="doctor-results">Mostrando 1 a 3 de 3 resultados</span>
+              <div class="pagination">
+                <button type="button" class="btn-pagination" aria-label="Página anterior" disabled>
+                  <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn-pagination" aria-label="Página siguiente" disabled>
+                  <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </section>
 
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Nombre de la Especialidad</th>
-              </tr>
-            </thead>
-            <tbody id="specialty-table-body"></tbody>
-          </table>
-          <p id="specialty-empty-state" class="empty-state">
-            No hay especialidades registradas.
-          </p>
-        </section>
-
-        <!-- PIE DE PÁGINA (Adentro del main) -->
-        <footer class="main-footer">
-          Gestor de Turnos &copy; 2026 - Proyecto Académico
-        </footer>
-      </main>
+          <footer class="main-footer">
+            Gestor de Turnos &copy; 2026 - Proyecto Académico
+          </footer>
+        </main>
+      </div>
     </div>
+    <script src="js/layout.js"></script>
+    <script src="js/specialties-store.js"></script>
     <script src="js/dashboard.js"></script>
   </body>
 </html>

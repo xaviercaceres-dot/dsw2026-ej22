@@ -1,19 +1,145 @@
+
 :root {
-  /* Paleta de colores MedPortal */
-  --bg-dark-blue: #03203a;
-  --bg-main: #f4f7f9;
+  /* Paleta que usa el TPI  */
+  --primary: #0b4a7f;
+  --primary-strong: #06305a;
+  --navy: #0a2748;
+  --bg-main: #f3f7fb;
+  --surface: #ffffff;
+  --border-color: #dbe3ec;
   --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  --accent-blue: #0e4c84;
-  --active-green: #10b981;
-  --warning-yellow: #f59e0b;
+  --text-secondary: #5b6b7d;
+  --light-blue: #e4f2fc;
+  --accent-teal: #0f9d8a;
+  --success: #0f8f74;
+  --success-bg: #e3f8f1;
+  --warning: #b45309;
+  --warning-bg: #fef3dc;
+  --neutral: #5f6b78;
+  --neutral-bg: #eceff3;
+  --danger: #c0392b;
+  --radius: 8px;
+  --shadow-sm: 0 1px 3px rgba(10, 39, 72, 0.06);
+   --bg-dark-blue: #03203a;
   --alert-blue-bg: #e6f2fb;
-  --border-color: #e2e8f0;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+body {
+  font-family: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  color: var(--text-primary);
+  background-color: var(--bg-main);
+  line-height: 1.45;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-strong);
+}
+
+.btn-outline {
+  background-color: var(--surface);
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.btn-outline:hover {
+  background-color: var(--light-blue);
+}
+
+.btn:focus-visible,
+.icon-btn:focus-visible {
+  outline: 3px solid rgba(11, 74, 127, 0.35);
+  outline-offset: 2px;
+}
+
+/* ---------- Badges de estado ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-dot::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.badge-success {
+  background-color: var(--success-bg);
+  color: var(--success);
+}
+
+.badge-warning {
+  background-color: var(--warning-bg);
+  color: var(--warning);
+}
+
+.badge-neutral {
+  background-color: var(--neutral-bg);
+  color: var(--neutral);
+}
+
+.badge-info {
+  background-color: var(--light-blue);
+  color: #1a6fc2;
 }

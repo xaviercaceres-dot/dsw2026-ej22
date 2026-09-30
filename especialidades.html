@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Especialidades | MedPortal</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard_style.css" />
+    <link rel="stylesheet" href="css/specialties_style.css" />
+  </head>
+  <body>
+    <div class="dashboard-layout">
+      <!-- MENÚ LATERAL -->
+      <nav id="sidebar" class="sidebar" aria-label="Menú principal">
+        <div class="sidebar-header">
+          <h2>Admin Portal</h2>
+          <span>Healthcare Management</span>
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a href="dashboard.html"
+              ><i class="fa-solid fa-table-cells-large" aria-hidden="true"></i> Panel</a
+            >
+          </li>
+          <li>
+            <a href="dashboard.html#directorio"
+              ><i class="fa-solid fa-briefcase-medical" aria-hidden="true"></i> Doctores</a
+            >
+          </li>
+          <li>
+            <a href="especialidades.html" class="active" aria-current="page"
+              ><i class="fa-solid fa-shapes" aria-hidden="true"></i> Especialidades</a
+            >
+          </li>
+          <li>
+            <a href="#"
+              ><i class="fa-solid fa-users-viewfinder" aria-hidden="true"></i> Búsqueda de Pacientes</a
+            >
+          </li>
+        </ul>
+        <div class="sidebar-footer">
+          <a href="#" class="sidebar-footer-link"
+            ><i class="fa-solid fa-gear" aria-hidden="true"></i> Configuración</a
+          >
+          <button type="button" id="btn-logout" class="sidebar-footer-link">
+            <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>
+            Cerrar Sesión
+          </button>
+          <div class="user-profile">
+            <img
+              src="https://ui-avatars.com/api/?name=Chibi&background=0b4a7f&color=fff"
+              alt=""
+            />
+            <div class="user-info">
+              <p>Chibi</p>
+              <span>Administrador</span>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="sidebar-overlay" class="sidebar-overlay" hidden></div>
+
+      <!-- CONTENIDO PRINCIPAL -->
+      <div class="main-wrapper">
+        <header class="mobile-topbar">
+          <button
+            type="button"
+            id="btn-toggle-menu"
+            class="menu-btn"
+            aria-controls="sidebar"
+            aria-expanded="false"
+            aria-label="Abrir menú"
+          >
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+          </button>
+          <span class="mobile-topbar-brand">Admin Portal</span>
+        </header>
+
+        <main class="main-content">
+          <header class="page-header page-header-row">
+            <div>
+              <h1 class="page-title">Directorio de Especialidades</h1>
+              <p class="page-subtitle">
+                Administre las categorías médicas, servicios y disponibilidad
+                del personal especializado.
+              </p>
+            </div>
+            <div class="page-header-tools">
+              <div class="search-box search-box-outline">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                <input
+                  type="search"
+                  id="search-specialty"
+                  placeholder="Buscar especialidad..."
+                  aria-label="Buscar especialidad por nombre"
+                  autocomplete="off"
+                />
+              </div>
+              <a href="especialidad-crear.html" class="btn btn-primary btn-new">
+                <i class="fa-solid fa-plus" aria-hidden="true"></i> Nueva
+                Especialidad
+              </a>
+            </div>
+          </header>
+
+          <p id="specialty-toast" class="toast" role="status" hidden></p>
+
+          <!-- LISTADO -->
+          <section class="table-card specialty-table-card" aria-label="Listado de especialidades">
+            <div class="table-scroll">
+              <table class="data-table specialty-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre de la<br />Especialidad</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col" class="col-actions">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="specialty-table-body"></tbody>
+              </table>
+            </div>
+            <div id="specialty-empty-state" class="table-empty" aria-live="polite" hidden>
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+              <p id="specialty-empty-text">No hay especialidades registradas.</p>
+            </div>
+          </section>
+
+          <!-- RESUMEN -->
+          <section class="summary-grid" aria-label="Resumen de especialidades">
+            <article class="summary-card summary-blue">
+              <div>
+                <p class="summary-title">Total especialidades</p>
+                <p id="summary-total" class="summary-value">0</p>
+                <p class="summary-note">
+                  <i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i>
+                  <span id="summary-total-note">registradas</span>
+                </p>
+              </div>
+              <span class="summary-icon"><i class="fa-solid fa-list-ul" aria-hidden="true"></i></span>
+            </article>
+            <article class="summary-card summary-blue">
+              <div>
+                <p class="summary-title">Más demandada</p>
+                <p class="summary-value">Cardiología</p>
+                <p class="summary-note">15% incremento en citas</p>
+              </div>
+              <span class="summary-icon"><i class="fa-regular fa-heart" aria-hidden="true"></i></span>
+            </article>
+            <article class="summary-card summary-teal">
+              <div>
+                <p class="summary-title">Nuevas este mes</p>
+                <p id="summary-new" class="summary-value">00</p>
+                <p id="summary-new-names" class="summary-note summary-strong">—</p>
+              </div>
+              <span class="summary-icon summary-icon-teal"
+                ><i class="fa-solid fa-certificate" aria-hidden="true"></i
+              ></span>
+            </article>
+          </section>
+
+          <footer class="main-footer">
+            Gestor de Turnos &copy; 2026 - Proyecto Académico
+          </footer>
+        </main>
+      </div>
+    </div>
+    <script src="js/layout.js"></script>
+    <script src="js/specialties-store.js"></script>
+    <script src="js/especialidades.js"></script>
+  </body>
+</html>
